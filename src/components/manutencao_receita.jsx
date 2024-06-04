@@ -3,16 +3,16 @@ import { useState, useEffect } from "react";
 import { api } from "../config_axios";
 import ItemLista from "./ItemLista";  
 
-const ManutencaoTarefas = () => {
+const ManutencaoReceita = () => {
     //servem para manipular os dados do formulário
     const {register, handleSubmit, reset} = useForm();
     //guardar e setar as informações do objeto
-    const [tarefas, setTarefas] = useState([]);
+    const [revenue, setRevenue] = useState([]);
 
     const obterLista = async () => {
         try{
-            const lista = await api.get("tarefas");
-            setTarefas(lista.data);
+            const lista = await api.get("revenue");
+            setRevenue(lista.data);
         }catch(error){
             alert(`Erro: ..Não foi possível obter os dados: ${error}`);
         }
@@ -30,43 +30,43 @@ const filtrarLista = async (campos) => {
         const lista = await api.get(`tarefas/filtro/${campos.palavra}`);
         lista.data.length
         ? setTarefas(lista.data)
-        : alert("Não há tarefas cadastradas com a palavra chave pesquisada");
+        : alert("Não há receita cadastradas com a palavra chave pesquisada");
     }catch(error){
         alert(`Erro: ..Não foi possível obter os dados: ${error}`);
     }
 }
 
 const excluir = async(id,titulo) => {
-    if(!window.confirm(`Confirma a exclusão do Tarefa ${titulo}?`)){
+    if(!window.confirm(`Confirma a exclusão da Receita ${titulo}?`)){
         return;
     }
     try{
         console.log("id é:"+id)
-        await api.delete(`tarefas/${id}`);
+        await api.delete(`revenue/${id}`);
         //formar uma nova lista de tarefas sem a tarefa que foi excluida
-        setTarefas(tarefas.filter(Tarefas => tarefas.id !== id));
+        setTarefas(revenue.filter(Revenue => revenue.id !== id));
         location.reload();
     }catch(error){
-        alert(`Erro: ..Não foi possível excluir a tarefa ${titulo}: ${error}`);
+        alert(`Erro: ..Não foi possível excluir a receita ${titulo}: ${error}`);
     }
 }
 
 //alterar os registros
 const alterar = async (id,titulo,index) => {
-    const novoStatus = prompt(`Digite o novo status da tarefa ${titulo}`);
+    const novoStatus = prompt(`Digite o novo status da receita ${titulo}`);
     if (novoStatus == "" ) {
         alert('Digite um status válido!(status em branco)')
         return;
     }
     try{//captura os erros 
         //chamando o backend e passando os dados
-        await api.put(`tarefas/${id}`,{status: novoStatus});
+        await api.put(`revenue/${id}`,{status: novoStatus});
         
-        const TarefasAtualizadas = [...tarefas];
-        const indiceTarefas = TarefasAtualizadas.find(Tarefas => Tarefas.id === id);
-        console.log("indice tarefa:"+indiceTarefas);
-        TarefasAtualizadas[indiceTarefas.id].status = novoStatus;
-        setTarefas(TarefasAtualizadas);
+        const RevenueUpdate = [...revenue];
+        const RevenueIndex = RevenueUpdate.find(Revenue => Revenue.id === id);
+        console.log("indice da receita: "+RevenueIndex);
+        RevenueUpdated[RevenueIndex.id].status = novoStatus;
+        setRevenue(RevenueUpdated);
         obterLista();
         location.reload();
     }catch(error){
@@ -78,7 +78,7 @@ const alterar = async (id,titulo,index) => {
        <div className="container">
         <div className="row">
             <div className="col-sm-7">
-                <h4 className="fst-italic mt-3">Manutenção de Tarefas</h4>
+                <h4 className="fst-italic mt-3">Atualização da receita</h4>
             </div>
             <div className="col-sm-5">
                 <form onSubmit={handleSubmit(filtrarLista)}>
@@ -94,27 +94,26 @@ const alterar = async (id,titulo,index) => {
         <table className="table table-striped mt-3">
             <thead>
                 <tr>
-                    <th>Cód.</th>
-                    <th>Titulo</th>
-                    <th>Descrição</th>
-                    <th>Status</th>
-                    <th>Data Criação</th>
-                    <th>Data Limite</th>
+                    <th>Name</th>
+                    <th>Ingredient</th>
+                    <th>Introduction</th>
+                    <th>Method Preparation</th>
+                    <th>Nutritional Information</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
                 {tarefas.map((tarefa) => (
                     <ItemLista
-                        key={tarefa.id}
-                        id={tarefa.id}
-                        titulo={tarefa.titulo}
-                        descricao={tarefa.descricao}
-                        status={tarefa.status}
-                        data_criacao={tarefa.data_criacao}
-                        data_limite={tarefa.data_limite}
-                        excluirClick={()=>excluir(tarefa.id,tarefa.titulo)}
-                        alterarClick={()=>alterar(tarefa.id,tarefa.titulo)}
+                        key={revenue.id}
+                        id={revenue.id}
+                        titulo={revenue.Name}
+                        descricao={revenue.Ingredient}
+                        status={revenue.Introduction}
+                        data_criacao={revenue.Method_preparation}
+                        data_limite={revenue.Nutritional_information}
+                        excluirClick={()=>excluir(revenue.id,revenue.Name)}
+                        alterarClick={()=>alterar(revenue.id,revenue.Name)}
                     />
                 ))}
             </tbody>
@@ -124,4 +123,4 @@ const alterar = async (id,titulo,index) => {
     );
 };
 
-export default ManutencaoTarefas;
+export default ManutencaoReceita;

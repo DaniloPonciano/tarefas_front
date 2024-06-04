@@ -8,7 +8,7 @@ const Cadastrar_Usuario = () => {
 
   const salvar = async (campos) => {
     try {
-      const response = await api.post("usuarios", campos);
+      const response = await api.post("users", campos);
       setAviso(`Usuário cadastrado com sucesso!"`);
       reset();
     } catch (error) {
@@ -22,14 +22,24 @@ const Cadastrar_Usuario = () => {
         <h4 className="fst-italic mb-3">Cadastrar Usuário</h4>
         <form onSubmit={handleSubmit(salvar)}>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="name">Nome</label>
             <input
               type="text"
               className="form-control"
-              id="username"
+              id="name"
               required
               autoFocus
-              {...register("username")}
+              {...register("name")}
+            />
+          </div>
+          <div className="form-group mt-2">
+            <label htmlFor="password">Senha</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              required
+              {...register("password")}
             />
           </div>
           <div className="form-group mt-2">
@@ -42,26 +52,16 @@ const Cadastrar_Usuario = () => {
               {...register("email")}
             />
           </div>
-          <div className="form-group mt-2">
-            <label htmlFor="status">Senha:</label>
-            <input
-              type="password"
-              className="form-control"
-              id="senha"
-              required
-              {...register("senha")}
-            />
-          </div>
                    
           <input
             type="submit"
             className="btn btn-primary mt-3"
-            value="Enviar"
+            value="Salvar"
           />
           <input
             type="reset"
             className="btn btn-danger mt-3 ms-3"
-            value="Limpar"
+            value="Apagar"
           />
         </form>
         <div className="alert mt-3">{aviso}</div>

@@ -1,6 +1,6 @@
-import Cadastrar_Tarefas from './components/cadastrar_tarefa';
+import Cadastrar_Tarefas from './components/cadastrar_receita';
 import Menu_Superior from './components/MenuSuperior';
-import Manutencao_Tarefas from './components/manutencao_tarefas';
+import Manutencao_Tarefas from './components/manutencao_receita';
 import FormularioLogin from './components/login';
 import Cadastrar_Usuarios from './components/cadastrar_usuario';
 import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
@@ -27,12 +27,12 @@ const RoutesWithAuth = () => {
       {autenticado && <Menu_Superior />}
       <Routes>
         <Route path="/login" element={<FormularioLogin />} />
-        <Route path="/" element={autenticado ? (<Cadastrar_Tarefas /> // Use replace to prevent history stack issues
+        <Route path="/" element={autenticado ? (<cadastrar_receita /> // Use replace to prevent history stack issues
             ) : <FormularioLogin />}
         />
-        <Route path="/tarefas" element={<ProtectedRoute><Cadastrar_Tarefas /></ProtectedRoute>} />
-        <Route path="/manutencao" element={<ProtectedRoute><Manutencao_Tarefas /></ProtectedRoute>} />
-        <Route path="/user" element={<ProtectedRoute><Cadastrar_Usuarios /></ProtectedRoute>} />
+        <Route path="/revenue" element={<ProtectedRoute><Cadastrar_Receita /></ProtectedRoute>} />
+        <Route path="/checklist_activities" element={<ProtectedRoute><Manutencao_Receita /></ProtectedRoute>} />
+        <Route path="/users" element={<ProtectedRoute><Cadastrar_Usuarios /></ProtectedRoute>} />
       </Routes>
     </Router>
   );

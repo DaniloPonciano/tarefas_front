@@ -4,20 +4,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { api } from "../config_axios";
 
 const FormularioLogin = () => {
-    const [username, setUsername] = useState("");
-    const [senha, setSenha] = useState("");
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
     const { login } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        if (username.trim() === "" || senha.trim() === "") {
+        if (name.trim() === "" || password.trim() === "") {
             alert("Preencha todos os campos!");
             return;
         }
     
         try {
-            const response = await api.post("/login", { username, senha });
+            const response = await api.post("/login", { name, password });
             if (response.status === 200) {
                 login();
             } else {
@@ -38,12 +38,12 @@ const FormularioLogin = () => {
                     <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">   
                         <form onSubmit={handleSubmit}>
                             <div className="form-outline mb-4">
-                                <input type="text" id="username" className="form-control form-control-lg" value={username} onChange={(e) => setUsername(e.target.value)} />
-                                <label className="form-label" htmlFor="username">Usuário</label>
+                                <input type="text" id="name" className="form-control form-control-lg" value={name} onChange={(e) => setNome(e.target.value)} />
+                                <label className="form-label" htmlFor="name">Usuário</label>
                             </div>
                             <div className="form-outline mb-4">
-                                <input type="password" id="senha" className="form-control form-control-lg" value={senha} onChange={(e) => setSenha(e.target.value)} />
-                                <label className="form-label" htmlFor="senha">Senha</label>
+                                <input type="password" id="senha" className="form-control form-control-lg" value={password} onChange={(e) => setSenha(e.target.value)} />
+                                <label className="form-label" htmlFor="password">Senha</label>
                             </div>
                            
                             <button type="submit" className="btn btn-primary btn-lg btn-block">Login</button>
