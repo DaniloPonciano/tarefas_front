@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { api } from "../config_axios";
 import ItemLista from "./ItemLista";  
 
-const ManutencaoReceita = () => {
+const Manutencao_receita = () => {
     //servem para manipular os dados do formulário
     const {register, handleSubmit, reset} = useForm();
     //guardar e setar as informações do objeto
@@ -11,7 +11,7 @@ const ManutencaoReceita = () => {
 
     const obterLista = async () => {
         try{
-            const lista = await api.get("revenue");
+            const lista = await api.get("revenue/all");
             setRevenue(lista.data);
         }catch(error){
             alert(`Erro: ..Não foi possível obter os dados: ${error}`);
@@ -27,7 +27,7 @@ useEffect(() => {
 
 const filtrarLista = async (campos) => {
     try{
-        const lista = await api.get(`tarefas/filtro/${campos.palavra}`);
+        const lista = await api.get(`/revenue/filtro${campos.palavra}`);
         lista.data.length
         ? setTarefas(lista.data)
         : alert("Não há receita cadastradas com a palavra chave pesquisada");
@@ -123,4 +123,4 @@ const alterar = async (id,titulo,index) => {
     );
 };
 
-export default ManutencaoReceita;
+export default Manutencao_receita;

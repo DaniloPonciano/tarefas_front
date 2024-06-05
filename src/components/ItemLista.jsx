@@ -4,16 +4,20 @@ import "../css/ItemLista.css";
 const ItemLista = ({
     id,
     name,
-    descricao,
-    status,
+    introduction,
+    ingredient,
+    method_preparation,
+    nutritional_information,
     excluirClick,
     alterarClick}) => {
     return (
         <tr>
             <td>{id}</td>
             <td>{name}</td>
-            <td>{descricao}</td>
-            <td>{status}</td>
+            <td>{introduction}</td>
+            <td>{ingredient}</td>
+            <td>{method_preparation}</td>
+            <td>{nutritional_information}</td>
             <td class="text-center">
                 <i className="exclui text-danger fw-bold" title="Excluir" onClick={excluirClick}>&#10008;</i>
                 <i className="altera text-sucess fw-bold ms-2" title="Alterar" onClick={alterarClick}>&#36;</i>

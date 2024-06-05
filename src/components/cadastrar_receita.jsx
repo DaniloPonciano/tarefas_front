@@ -8,7 +8,7 @@ const Cadastrar_receita = () => {
 
   const salvar = async (campos) => {
     try {
-      const response = await api.post("Título", campos);
+      const response = await api.post("/revenue/createRevenue", campos);
       setAviso(`Receita cadastrada com sucesso!"`);
       reset();
     } catch (error) {

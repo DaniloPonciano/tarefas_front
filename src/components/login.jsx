@@ -38,11 +38,11 @@ const FormularioLogin = () => {
                     <div className="col-md-7 col-lg-5 col-xl-5 offset-xl-1">   
                         <form onSubmit={handleSubmit}>
                             <div className="form-outline mb-4">
-                                <input type="text" id="name" className="form-control form-control-lg" value={name} onChange={(e) => setNome(e.target.value)} />
+                                <input type="text" id="name" className="form-control form-control-lg" value={name} onChange={(e) => setName(e.target.value)} />
                                 <label className="form-label" htmlFor="name">Usuário</label>
                             </div>
                             <div className="form-outline mb-4">
-                                <input type="password" id="senha" className="form-control form-control-lg" value={password} onChange={(e) => setSenha(e.target.value)} />
+                                <input type="password" id="password" className="form-control form-control-lg" value={password} onChange={(e) => setPassword(e.target.value)} />
                                 <label className="form-label" htmlFor="password">Senha</label>
                             </div>
                            

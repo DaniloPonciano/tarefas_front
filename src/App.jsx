@@ -1,11 +1,11 @@
-import Cadastrar_Tarefas from './components/cadastrar_receita';
 import Menu_Superior from './components/MenuSuperior';
-import Manutencao_Tarefas from './components/manutencao_receita';
 import FormularioLogin from './components/login';
-import Cadastrar_Usuarios from './components/cadastrar_usuario';
 import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider, useAuth } from './components/AuthProvider';
+import Cadastrar_Usuario from './components/Cadastrar_usuario';
+import Cadastrar_receita from './components/Cadastrar_receita';
+import Manutencao_receita from './components/manutencao_receita';
 
 const ProtectedRoute = ({ children }) => {
   const { autenticado } = useAuth();
@@ -27,12 +27,12 @@ const RoutesWithAuth = () => {
       {autenticado && <Menu_Superior />}
       <Routes>
         <Route path="/login" element={<FormularioLogin />} />
-        <Route path="/" element={autenticado ? (<cadastrar_receita /> // Use replace to prevent history stack issues
+        <Route path="/" element={autenticado ? (<Cadastrar_Usuario /> // Use replace to prevent history stack issues
             ) : <FormularioLogin />}
         />
-        <Route path="/revenue" element={<ProtectedRoute><Cadastrar_Receita /></ProtectedRoute>} />
-        <Route path="/checklist_activities" element={<ProtectedRoute><Manutencao_Receita /></ProtectedRoute>} />
-        <Route path="/users" element={<ProtectedRoute><Cadastrar_Usuarios /></ProtectedRoute>} />
+        <Route path="/revenue" element={<ProtectedRoute><Manutencao_receita/></ProtectedRoute>} />
+        <Route path="/revenue" element={<ProtectedRoute><Cadastrar_receita/></ProtectedRoute>} />
+        <Route path="/Users" element={<ProtectedRoute><Cadastrar_Usuario/></ProtectedRoute>} />
       </Routes>
     </Router>
   );
